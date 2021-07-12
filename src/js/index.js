@@ -22,8 +22,8 @@ function getImgList(e) {
 
     getImgName();
     
-    if (getImgName) {
-        refs.loadMoreBtn.style.display = "block";
+    if (renderImgList) {
+      refs.loadMoreBtn.style.display = 'block';
     }
 };
 
