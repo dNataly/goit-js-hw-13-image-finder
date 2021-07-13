@@ -34,9 +34,9 @@ function getImgList(e) {
   e.preventDefault();
   reset();
   fetchCards.query = e.currentTarget.elements.query.value;
-  if (fetchCards.query === '') {
+  if (fetchCards.query === '' || fetchCards.query === ' ') {
     toastr.warning('Type something');
-    return
+    return;
   }
 
     getImgName();
