@@ -7,6 +7,25 @@ const fetchCards = new apiService();
 
 import * as basicLightbox from 'basiclightbox';
 import 'basiclightbox/dist/basicLightbox.min.css';
+import toastr from 'toastr';
+import 'toastr/build/toastr.css';
+toastr.options = {
+  closeButton: false,
+  debug: false,
+  newestOnTop: false,
+  progressBar: true,
+  positionClass: 'toast-bottom-right',
+  preventDuplicates: false,
+  onclick: null,
+  showDuration: '300',
+  hideDuration: '1000',
+  timeOut: '5000',
+  extendedTimeOut: '1000',
+  showEasing: 'swing',
+  hideEasing: 'linear',
+  showMethod: 'fadeIn',
+  hideMethod: 'fadeOut',
+};
 
 refs.form.addEventListener('submit', getImgList);
 refs.loadMoreBtn.addEventListener('click', loadMore)
@@ -16,6 +35,7 @@ function getImgList(e) {
   reset();
   fetchCards.query = e.currentTarget.elements.query.value;
   if (fetchCards.query === '') {
+    toastr.warning('Type something');
     return
   }
 
@@ -42,7 +62,8 @@ function getImgName() {
 function renderImgList(hits) {
   refs.galleryList.insertAdjacentHTML('beforeend', getImgMarkup(hits));
     if (hits.length < 12) {
-        refs.loadMoreBtn.style.display = 'none';
+      refs.loadMoreBtn.style.display = 'none';
+      toastr.warning('No more pictures :(');
     }
 }
 

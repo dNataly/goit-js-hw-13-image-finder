@@ -31,6 +31,7 @@
     "handlebars": "^4.7.7",
     "jquery": "^1.9.1",
     "lodash.debounce": "^4.0.8",
-    "modal.js": "^1.1.7"
+    "modal.js": "^1.1.7",
+    "toastr": "^2.1.4"
   }
 }
