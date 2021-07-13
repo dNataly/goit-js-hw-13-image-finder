@@ -13,10 +13,9 @@ refs.loadMoreBtn.addEventListener('click', loadMore)
 
 function getImgList(e) {
   e.preventDefault();
-    reset();
+  reset();
   fetchCards.query = e.currentTarget.elements.query.value;
-
-  if (fetchCards.query === '' || fetchCards.query === ' ') {
+  if (fetchCards.query === '') {
     return
   }
 
@@ -29,7 +28,15 @@ function getImgList(e) {
 
 
 function getImgName() {
-    return fetchCards.fetchImg().then(renderImgList);
+  if (fetchCards.nextPage) {
+    $('html, body').animate(
+      {
+        scrollTop: $('.scroll-to').offset().top + 400,
+      },
+      1000,
+    );
+  }
+  return fetchCards.fetchImg().then(renderImgList);
 }
 
 function renderImgList(hits) {
@@ -40,20 +47,14 @@ function renderImgList(hits) {
 }
 
 function reset() {
-    refs.galleryList.innerHTML = '';
-    refs.input.innerText = '';
+  refs.galleryList.innerHTML = '';
+  refs.input.innerText = '';
+  fetchCards.resetPage();
 }
 
 function loadMore() {
-    fetchCards.nextPage();
-    getImgName();
-
-    setTimeout(() => {
-      refs.loadMoreBtn.scrollIntoView({
-        behavior: 'smooth',
-        block: 'end',
-      });
-    }, 100);
+  fetchCards.nextPage();
+  getImgName();
 }
 
 refs.galleryList.addEventListener('click', createModal);
