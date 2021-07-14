@@ -48,14 +48,6 @@ function getImgList(e) {
 
 
 function getImgName() {
-  if (fetchCards.nextPage) {
-    $('html, body').animate(
-      {
-        scrollTop: $('.scroll-to').offset().top + 400,
-      },
-      1000,
-    );
-  }
   return fetchCards.fetchImg().then(renderImgList);
 }
 
@@ -65,6 +57,7 @@ function renderImgList(hits) {
       refs.loadMoreBtn.style.display = 'none';
       toastr.warning('No more pictures :(');
     }
+  if (renderImgList) { window.scrollTo({ left: 0, top: document.body.scrollHeight, behavior: 'smooth' }) };
 }
 
 function reset() {
