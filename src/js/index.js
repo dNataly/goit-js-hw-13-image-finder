@@ -87,7 +87,6 @@ function scroll() {
 function loadMore() {
   fetchCards.nextPage();
   getImgName().then(scroll());
-//  scroll();
 }
 
 refs.galleryList.addEventListener('click', createModal);
