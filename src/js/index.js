@@ -48,7 +48,12 @@ function getImgList(e) {
 
 
 function getImgName() {
-  return fetchCards.fetchImg().then(renderImgList);
+  return fetchCards
+    .fetchImg()
+    .then(renderImgList)
+    // .then(window.scrollTo({ left: 0, top: document.body.scrollHeight, behavior: 'smooth' }));
+  // window.scrollTo({ left: 0, top: document.body.scrollHeight, behavior: 'smooth' });
+
 }
 
 function renderImgList(hits) {
@@ -57,7 +62,6 @@ function renderImgList(hits) {
       refs.loadMoreBtn.style.display = 'none';
       toastr.warning('No more pictures :(');
     }
-  if (renderImgList) { window.scrollTo({ left: 0, top: document.body.scrollHeight, behavior: 'smooth' }) };
 }
 
 function reset() {
@@ -66,9 +70,24 @@ function reset() {
   fetchCards.resetPage();
 }
 
+function scroll() {
+ try {
+   setTimeout(() => {
+     window.scrollTo({
+       top: document.body.scrollHeight,
+       left: 0,
+       behavior: 'smooth',
+     });
+   }, 1000);
+ } catch (error) {
+   console.log(error);
+  }
+}
+
 function loadMore() {
   fetchCards.nextPage();
-  getImgName();
+  getImgName().then(scroll());
+//  scroll();
 }
 
 refs.galleryList.addEventListener('click', createModal);
