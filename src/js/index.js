@@ -51,9 +51,6 @@ function getImgName() {
   return fetchCards
     .fetchImg()
     .then(renderImgList)
-    // .then(window.scrollTo({ left: 0, top: document.body.scrollHeight, behavior: 'smooth' }));
-  // window.scrollTo({ left: 0, top: document.body.scrollHeight, behavior: 'smooth' });
-
 }
 
 function renderImgList(hits) {
