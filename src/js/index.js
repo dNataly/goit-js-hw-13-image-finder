@@ -62,6 +62,9 @@ function renderImgList(hits) {
       refs.loadMoreBtn.style.display = 'none';
       toastr.warning('No more pictures :(');
     }
+    if(fetchCards.nextPage) {
+      scroll();
+    }
 }
 
 function reset() {
@@ -71,22 +74,15 @@ function reset() {
 }
 
 function scroll() {
- try {
-   setTimeout(() => {
-     window.scrollTo({
-       top: document.body.scrollHeight,
-       left: 0,
-       behavior: 'smooth',
-     });
-   }, 1000);
- } catch (error) {
-   console.log(error);
-  }
+  refs.loadMoreBtn.scrollIntoView({
+    behavior: 'smooth',
+    block: 'end',
+  });
 }
 
 function loadMore() {
   fetchCards.nextPage();
-  getImgName().then(scroll());
+  getImgName();
 }
 
 refs.galleryList.addEventListener('click', createModal);
